@@ -1,26 +1,82 @@
 <!DOCTYPE html>
 <html>
+    
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QR Code Scanner</title>
     <script src="qz-tray.js"></script>
-    <script src="script.js"></script>
+   
     <script src="printer.js"></script>
     <script src="webhook.js" ></script>
     <style>
         #video {
-            width: 30%;
+            width: 500px;
             height: auto;
         }
     </style>
 </head>
 <body>
     <h1>QR Code Scanner</h1>
-    <video id="video" autoplay></video>
-    <label for="instantPrint">In ngay:</label>
-<input type="checkbox" id="instantPrint" name="instantPrint">
+
+   <video id="video" width="400" playsinline autoplay></video>
+   <button id="switchCamera">Chuyển đổi Camera</button>
+   
+    <ul>
+        <li>
+            <input type="checkbox" id="confirm" name="confirmCheck">
+            <label for="confirmCheck">Xác nhận sau khi quét</label>
+        </li>
+         <li>
+            <input type="checkbox" id="print" name="instantPrint">
+            <label for="instantPrint">In sau khi quét</label>
+        </li>
+        <li>
+           <!-- Ô input nhập URL webhook với sự kiện oninput -->
+            <label for="webhookUrl">URL Webhook:</label>
+            <input type="text" id="webhookUrl" placeholder="Nhập URL webhook của bạn" oninput="checkURL()">
+            <p id="urlError" class="error" style="display: none;">URL không hợp lệ.</p>
+        </li>
+    </ul>
+    
+    
+
+    
     <div id="result"></div>
+    
+     <!-- Pop-up để hiển thị thông tin QR và nút xác nhận -->
+    <div id="qrPopup" style="display: none;">
+        <p id="qrInfo"></p>
+        <button onclick="confirmInfo()">Xác nhận</button>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/jsqr/dist/jsQR.min.js"></script>
     
+    
+   
+    <script> //check nhập url
+        function checkURL() {
+    var url = document.getElementById('webhookUrl').value;
+    var urlError = document.getElementById('urlError');
+    
+    if (url.trim() === '' || isValidUrl(url)) {
+        // Nếu URL hợp lệ hoặc ô input trống, ẩn thông báo lỗi
+        urlError.style.display = 'none';
+    } else {
+        // Hiển thị thông báo lỗi nếu URL không hợp lệ
+        urlError.style.display = 'block';
+    }
+}
+
+function isValidUrl(string) {
+    try {
+        new URL(string);
+        return true;
+    } catch (_) {
+        return false;  
+    }
+}
+    </script>
+     <script src="script.js"></script>
 </body>
 </html>

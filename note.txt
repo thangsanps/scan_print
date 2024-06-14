@@ -1,0 +1,11 @@
+Viết cho tôi 1 giao diện website có các chức năng sau:
+Màn hình 1:
+- Đăng nhập
+Màn hình 2: 
+- Hiện thị hình ảnh camera
+- Checkbox: Xác nhận sau khi quét.
+- Checkbox: In sau khi quét
+Màn hình 3: Cài đặt
+- Dữ liệu đầu vào:
+  - kết nối tới Larkbase
+  - 
